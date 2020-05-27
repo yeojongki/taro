@@ -12,6 +12,7 @@ import {
   internal_get_original,
   interceptors,
   RefsArray,
+  handleLoopRef,
   useEffect,
   useLayoutEffect,
   useReducer,
@@ -32,7 +33,8 @@ import {
   useImperativeHandle,
   useContext,
   createContext,
-  memo
+  memo,
+  setIsUsingDiff
 } from '@tarojs/taro'
 import { shallowEqual } from '@tarojs/utils'
 
@@ -62,7 +64,7 @@ export const Taro = {
   internal_get_original,
   interceptors,
   RefsArray,
-  getElementById,
+  handleLoopRef: handleLoopRef(getElementById),
   propsManager,
   genCompid,
   useEffect,
@@ -86,7 +88,8 @@ export const Taro = {
   useContext,
   createContext,
   memo,
-  shallowEqual
+  shallowEqual,
+  setIsUsingDiff
 }
 
 export default Taro

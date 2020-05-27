@@ -45,8 +45,7 @@ const siteConfig = {
     {search: true},
     {href: 'https://taro-ui.jd.com', label: 'Taro-UI'},
     {href: 'https://taro-ext.jd.com', label: '物料市场'},
-    {href: 'https://taro-club.jd.com', label: '论坛'},
-    {href: 'https://github.com/NervJS/taro', label: 'GitHub'}
+    {href: 'https://taro-club.jd.com', label: '论坛'}
   ],
 
   algolia: {
@@ -93,7 +92,7 @@ const siteConfig = {
 
   // Add custom scripts here that would be placed in <script> tags
   scripts: [
-    'https://buttons.github.io/buttons.js',
+    'http://storage.jd.com/taro-docs/buttons.js',
     'https://jdc.jd.com/demo/talenttest/js/url.js',
     {
       src: 'https://storage.jd.com/taro-resource/tongji.js',

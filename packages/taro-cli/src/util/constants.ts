@@ -12,7 +12,8 @@ export const enum processTypeEnum {
   ERROR = 'error',
   WARNING = 'warning',
   UNLINK = 'unlink',
-  REFERENCE = 'reference'
+  REFERENCE = 'reference',
+  REMIND = 'remind'
 }
 
 export interface IProcessTypeMap {
@@ -66,6 +67,10 @@ export const processTypeMap: IProcessTypeMap = {
   [processTypeEnum.REFERENCE]: {
     name: '引用',
     color: 'blue'
+  },
+  [processTypeEnum.REMIND]: {
+    name: '提示',
+    color: 'green'
   }
 }
 
@@ -361,3 +366,5 @@ export const isWindows = os.platform() === 'win32'
 export const DEFAULT_TEMPLATE_SRC = 'github:NervJS/taro-project-templates'
 export const TARO_CONFIG_FLODER = '.taro'
 export const TARO_BASE_CONFIG = 'index.json'
+
+export const GLOBAL_PROPS = '{Function: Function,Boolean: Boolean,Object: Object,Number: Number,Array: Array,Date: Date,String: String,Symbol: Symbol,Error: Error,TypeError: TypeError,Map: Map,Set: Set,WeakMap: WeakMap,WeakSet: WeakSet,ArrayBuffer: ArrayBuffer,Math: Math,Promise: Promise,RegExp: RegExp,DataView: DataView,isFinite: isFinite,parseInt: parseInt,parseFloat: parseFloat,Float32Array: Float32Array,Float64Array: Float64Array,Int8Array: Int8Array,Int16Array: Int16Array,Int32Array: Int32Array,Uint8Array: Uint8Array,Uint16Array: Uint16Array,Uint32Array: Uint32Array,Uint8ClampedArray: Uint8ClampedArray,setTimeout: setTimeout,clearTimeout: clearTimeout,setInterval: setInterval,clearInterval: clearInterval}'

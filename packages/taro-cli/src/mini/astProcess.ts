@@ -62,10 +62,17 @@ import { QUICKAPP_SPECIAL_COMPONENTS } from './constants'
 function generateCssModuleMapFilename (styleFilePath) {
   const {
     sourceDir,
-    outputDir
+    outputDir,
+    nodeModulesPath,
+    npmOutputDir
   } = getBuildData()
   const cssModuleMapFilename = path.basename(styleFilePath) + '.map.js'
-  const cssModuleMapFile = path.join(path.dirname(styleFilePath), cssModuleMapFilename).replace(sourceDir, outputDir)
+  let cssModuleMapFile
+  if (NODE_MODULES_REG.test(styleFilePath)) {
+    cssModuleMapFile = path.join(path.dirname(styleFilePath), cssModuleMapFilename).replace(nodeModulesPath, npmOutputDir)
+  } else {
+    cssModuleMapFile = path.join(path.dirname(styleFilePath), cssModuleMapFilename).replace(sourceDir, outputDir)
+  }
   return cssModuleMapFile
 }
 
@@ -953,7 +960,7 @@ export function parseAst (
             node.body.push(template(`Taro.initPxTransform(${JSON.stringify(pxTransformConfig)})`, babylonConfig as any)() as any)
             break
           case PARSE_AST_TYPE.PAGE:
-            if (buildAdapter === BUILD_TYPES.WEAPP || buildAdapter === BUILD_TYPES.QQ) {
+            if (buildAdapter === BUILD_TYPES.WEAPP || buildAdapter === BUILD_TYPES.QQ || buildAdapter === BUILD_TYPES.SWAN) {
               node.body.push(template(`Component(require('${taroMiniAppFrameworkPath}').default.createComponent(${exportVariableName}, true))`, babylonConfig as any)() as any)
             } else if (isQuickApp) {
               const pagePath = sourceFilePath.replace(sourceDir, '').replace(/\\/g, '/').replace(extnameExpRegOf(sourceFilePath), '')
@@ -1014,6 +1021,7 @@ export function parseComponentExportAst (ast: t.File, componentName: string, com
       [require('babel-plugin-transform-define').default, constantsReplaceList]
     ]
   }).ast as t.File
+  componentName = componentName.split('|')[1] || componentName
   traverse(ast, {
     ExportNamedDeclaration (astPath) {
       const node = astPath.node

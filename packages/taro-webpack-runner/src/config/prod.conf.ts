@@ -34,6 +34,7 @@ export default function (appPath: string, config: Partial<BuildConfig>): any {
     designWidth = 750,
     deviceRatio,
     enableSourceMap = false,
+    sourceMapType,
     enableExtract = true,
 
     defineConstants = emptyObj,
@@ -46,6 +47,7 @@ export default function (appPath: string, config: Partial<BuildConfig>): any {
     mediaUrlLoaderOption = emptyObj,
     fontUrlLoaderOption = emptyObj,
     imageUrlLoaderOption = emptyObj,
+    miniCssExtractLoaderOption = emptyObj,
 
     miniCssExtractPluginOption = emptyObj,
     esnextModules = [],
@@ -114,7 +116,7 @@ export default function (appPath: string, config: Partial<BuildConfig>): any {
 
   chain.merge({
     mode,
-    devtool: getDevtool(enableSourceMap),
+    devtool: getDevtool({ enableSourceMap, sourceMapType }),
     entry,
     output: getOutput(appPath, [{
       outputRoot,
@@ -127,7 +129,7 @@ export default function (appPath: string, config: Partial<BuildConfig>): any {
       deviceRatio,
       enableExtract,
       enableSourceMap,
-  
+
       styleLoaderOption,
       cssLoaderOption,
       lessLoaderOption,
@@ -136,8 +138,9 @@ export default function (appPath: string, config: Partial<BuildConfig>): any {
       fontUrlLoaderOption,
       imageUrlLoaderOption,
       mediaUrlLoaderOption,
+      miniCssExtractLoaderOption,
       esnextModules,
-  
+
       module,
       plugins,
       staticDirectory

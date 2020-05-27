@@ -25,7 +25,7 @@ title: Hooks
 在 Taro 中使用 Hooks API 很简单，只需要从 `@tarojs/taro` 中引入即可。
 
 ```javascript
-import { useEffect, useLayoutEffect, useReducer, useState, useRef, useCallback, useMemo } from '@tarojs/taro'
+import { useEffect, useLayoutEffect, useReducer, useState, useContext, useRef, useCallback, useMemo } from '@tarojs/taro'
 ```
 
 ### `useState`
@@ -476,6 +476,16 @@ const router = useRouter() // { path: '', params: { ... } }
 ```
 
 `useRouter` 是 Taro 专有的 Hook，等同于页面为类时的 `this.$router`
+
+### `useScope`
+
+> 自 `1.3.20` 开始支持
+
+```jsx
+const scope = useScope()
+```
+
+`useScope` 是 Taro 专有的 Hook，等同于页面为类时的 `this.$scope`
 
 ## 页面及组件中相关属性设置
 
